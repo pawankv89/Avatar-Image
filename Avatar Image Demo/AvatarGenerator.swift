@@ -1,39 +1,10 @@
-# Avatar-Image
-
-## Create Avatar Image Demo.
-
-Added Some screens here.
-
-![](https://github.com/pawankv89/Avatar-Image/blob/master/images/screen_1.png)
-
-## Usage
-
-#### Controller
-
-```swift
-
-import UIKit
-
-class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        let imageview = UIImageView()
-        imageview.backgroundColor = .white
-        imageview.frame = CGRect.init(x: 50, y: 50, width: 300, height: 300)
-        imageview.layer.cornerRadius = imageview.frame.size.height / 2
-        imageview.layer.borderColor = UIColor.red.cgColor
-        imageview.layer.borderWidth = 1
-        imageview.layer.masksToBounds = true
-        imageview.center = self.view.center
-        self.view.addSubview(imageview)
-        
-        let image = AvatarGenerator.avatarImage(withSeed: "300", width: 300, height: 300)
-        imageview.image = image
-             
-    }
-}
+//
+//  AvatarGenerator.swift
+//  Avatar Image Demo
+//
+//  Created by Pawan kumar on 06/08/20.
+//  Copyright © 2020 Pawan Kumar. All rights reserved.
+//
 
 import UIKit
 import Foundation
@@ -116,6 +87,9 @@ open class AvatarGenerator {
         return UIColor(red: r, green: g, blue: b, alpha: a)
     }
     
+    // A LCG to create pseudo-random numbers (using a seed)
+    //
+    // Inspired by: https://stackoverflow.com/questions/24027216/how-do-you-generate-a-random-number-in-swift
     class LinearCongruentialGenerator {
         var lastRandom = 0.0
         let m = 139968.0
@@ -142,6 +116,8 @@ open class AvatarGenerator {
     }
 }
 
+// An extension to return a java-compatible hash of a string
+// See for example: http://grepcode.com/file/repository.grepcode.com/java/root/jdk/openjdk/6-b14/java/lang/String.java#String.hashCode%28%29
 extension String {
     func javaHash() -> Int {
         var hash:Int32 = 0
@@ -153,19 +129,3 @@ extension String {
         return Int(hash)
     }
 }
-
-```
-
-## Requirements
-
-### Build
-
-Xcode Version 11.3 (11C29), iOS 13.2.0 SDK
-
-## License
-
-This code is distributed under the terms and conditions of the [MIT license](LICENSE).
-
-## Change-log
-
-A brief summary of each this release can be found in the [CHANGELOG](CHANGELOG.mdown). 
